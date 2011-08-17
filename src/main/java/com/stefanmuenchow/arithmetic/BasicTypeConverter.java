@@ -22,7 +22,7 @@ import java.util.Map;
  * 
  * @author Stefan Münchow
  */
-class BasicTypeConverter implements TypeConverter {
+public class BasicTypeConverter implements TypeConverter {
 	private final Map<Class<?>, String> converterMethods;
 	
 	public BasicTypeConverter() {
@@ -36,7 +36,7 @@ class BasicTypeConverter implements TypeConverter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <X extends Number> X convertNumber(Number n, Class<? extends Number> targetClass) {
+	public <X extends Number> X convertNumber(Number n, Class<X> targetClass) {
 		X result = null;
 		
 		if(n.getClass().equals(targetClass)) { // No conversion needed

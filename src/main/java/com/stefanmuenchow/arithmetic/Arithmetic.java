@@ -134,7 +134,8 @@ public class Arithmetic<X extends Number> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private X convertNumber(Number n) {
-		return typeConverter.convertNumber(n, targetClass);
+		return (X) typeConverter.convertNumber(n, targetClass);
 	}
 }
