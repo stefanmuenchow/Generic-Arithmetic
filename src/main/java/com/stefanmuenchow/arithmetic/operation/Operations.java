@@ -11,48 +11,22 @@
 
 package com.stefanmuenchow.arithmetic.operation;
 
-public class Operations {
-	private static BinaryOperation addition = new Addition();
-	private static BinaryOperation division = new Division();
-	private static BinaryOperation maximum = new Maximum();
-	private static BinaryOperation minimum = new Minimum();
-	private static BinaryOperation multiplication = new Multiplication();
-	private static BinaryOperation subtraction = new Subtraction();
-	private static UnaryOperation absolute = new Absolute();
-	private static UnaryOperation negation = new Negation();
+
+public interface Operations<X extends Number> {
 	
-	private Operations() {
-	}
-
-	public static BinaryOperation getAddition() {
-		return addition;
-	}
-
-	public static BinaryOperation getDivision() {
-		return division;
-	}
-
-	public static BinaryOperation getMaximum() {
-		return maximum;
-	}
-
-	public static BinaryOperation getMinimum() {
-		return minimum;
-	}
-
-	public static BinaryOperation getMultiplication() {
-		return multiplication;
-	}
-
-	public static BinaryOperation getSubtraction() {
-		return subtraction;
-	}
-
-	public static UnaryOperation getAbsolute() {
-		return absolute;
-	}
-
-	public static UnaryOperation getNegation() {
-		return negation;
-	}
+	X add(X value, X x);
+	
+	X sub(X a, X b);
+	
+	X mul(X a, X b);
+	
+	X div(X a, X b);
+	
+	X max(X a, X b);
+	
+	X min(X a, X b);
+	
+	X abs(X a);
+	
+	X neg(X a);
 }

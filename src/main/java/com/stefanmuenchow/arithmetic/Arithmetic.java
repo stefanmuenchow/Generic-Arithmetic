@@ -11,13 +11,10 @@
 
 package com.stefanmuenchow.arithmetic;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.security.InvalidParameterException;
-
-import com.stefanmuenchow.arithmetic.operation.BinaryOperation;
+import com.stefanmuenchow.arithmetic.converter.ConverterRepository;
+import com.stefanmuenchow.arithmetic.converter.TypeConverter;
+import com.stefanmuenchow.arithmetic.operation.OperationsRepository;
 import com.stefanmuenchow.arithmetic.operation.Operations;
-import com.stefanmuenchow.arithmetic.operation.UnaryOperation;
 
 /**
  * Provides generic arithmetic for all subclasses of class {@link Number}.
@@ -27,16 +24,16 @@ import com.stefanmuenchow.arithmetic.operation.UnaryOperation;
 public class Arithmetic<X extends Number> {
 	private Class<? extends Number> targetClass;
 	private X value;
-	private final TypeConverter typeConverter;
 	
-	public Arithmetic(X value, TypeConverter typeConverter) {
-		this.targetClass = value.getClass();
-		this.value = value;
-		this.typeConverter = typeConverter;
+	public static <Y extends Number> void addTargetType(Class<Y> targetType, 
+			TypeConverter<Y> converter, Operations<Y> operations) {
+		ConverterRepository.getInstance().addConverter(targetType, converter);
+		OperationsRepository.getInstance().addOperations(targetType, operations);
 	}
 	
 	public Arithmetic(X value) {
-		this(value, new BasicTypeConverter());
+		this.targetClass = value.getClass();
+		this.value = value;
 	}
 	
 	public X value() {
@@ -44,98 +41,52 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> add(A operand) {
-		value = binaryOperation(value, operand, Operations.getAddition());
+		value = getOperations().add(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> sub(A operand) {
-		value = binaryOperation(value, operand, Operations.getSubtraction());
+		value = getOperations().sub(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> div(A operand) {
-		value = binaryOperation(value, operand, Operations.getDivision());
+		value = getOperations().div(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> mul(A operand) {
-		value = binaryOperation(value, operand, Operations.getMultiplication());
+		value = getOperations().mul(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> max(A operand) {
-		value = binaryOperation(value, operand, Operations.getMaximum());
+		value = getOperations().max(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> min(A operand) {
-		value = binaryOperation(value, operand, Operations.getMinimum());
+		value = getOperations().min(value, convertNumber(operand));
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> abs() {
-		value = unaryOperation(value, Operations.getAbsolute());
+		value = getOperations().abs(value);
 		return this;
 	}
 	
 	public <A extends Number, B extends Number> Arithmetic<X> neg() {
-		value = unaryOperation(value, Operations.getNegation());
+		value = getOperations().neg(value);
 		return this;
-	}
-	
-	@SuppressWarnings({ "unchecked" })
-	private <A extends Number, B extends Number> X binaryOperation(A operand1, B operand2, BinaryOperation operation) {
-		X value1 = convertNumber(operand1);
-		X value2 = convertNumber(operand2);
-		
-		if (targetClass.equals(Integer.class)) {
-			return (X) operation.apply((Integer) value1, (Integer) value2);
-		} else if (targetClass.equals(Long.class)) {
-			return (X) operation.apply((Long) value1, (Long) value2);
-		} else if (targetClass.equals(Short.class)) {
-			return (X) operation.apply((Short) value1, (Short) value2);
-		} else if (targetClass.equals(Byte.class)) {
-			return (X) operation.apply((Byte) value1, (Byte) value2);
-		} else if (targetClass.equals(Double.class)) {
-			return (X) operation.apply((Double) value1, (Double) value2);
-		} else if (targetClass.equals(Float.class)) {
-			return (X) operation.apply((Float) value1, (Float) value2);
-		} else if (targetClass.equals(BigInteger.class)) {
-			return (X) operation.apply((BigInteger) value1, (BigInteger) value2);
-		} else if (targetClass.equals(BigDecimal.class)) {
-			return (X) operation.apply((BigDecimal) value1, (BigDecimal) value2);
-		} else {
-			throw new InvalidParameterException("One of the parameters is of an invalid class");
-		}
-	}
-	
-	@SuppressWarnings({ "unchecked" })
-	private <A extends Number> X unaryOperation(A operand, UnaryOperation operation) {
-		X value1 = convertNumber(operand);
-		
-		if (targetClass.equals(Integer.class)) {
-			return (X) operation.apply((Integer) value1);
-		} else if (targetClass.equals(Long.class)) {
-			return (X) operation.apply((Long) value1);
-		} else if (targetClass.equals(Short.class)) {
-			return (X) operation.apply((Short) value1);
-		} else if (targetClass.equals(Byte.class)) {
-			return (X) operation.apply((Byte) value1);
-		} else if (targetClass.equals(Double.class)) {
-			return (X) operation.apply((Double) value1);
-		} else if (targetClass.equals(Float.class)) {
-			return (X) operation.apply((Float) value1);
-		} else if (targetClass.equals(BigInteger.class)) {
-			return (X) operation.apply((BigInteger) value1);
-		} else if (targetClass.equals(BigDecimal.class)) {
-			return (X) operation.apply((BigDecimal) value1);
-		} else {
-			throw new InvalidParameterException("One of the parameters is of an invalid class");
-		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	private X convertNumber(Number n) {
-		return (X) typeConverter.convertNumber(n, targetClass);
+		return (X) ConverterRepository.getInstance().getConverter(targetClass).convertNumber(n);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private Operations<X> getOperations() {
+		return (Operations<X>) OperationsRepository.getInstance().getOperations(targetClass);
 	}
 }
