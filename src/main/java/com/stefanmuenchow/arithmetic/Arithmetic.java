@@ -16,7 +16,7 @@ import java.math.BigInteger;
 import java.security.InvalidParameterException;
 
 import com.stefanmuenchow.arithmetic.operation.BinaryOperation;
-import com.stefanmuenchow.arithmetic.operation.OperationRepository;
+import com.stefanmuenchow.arithmetic.operation.Operations;
 import com.stefanmuenchow.arithmetic.operation.UnaryOperation;
 
 /**
@@ -25,94 +25,104 @@ import com.stefanmuenchow.arithmetic.operation.UnaryOperation;
  * @author Stefan Münchow
  */
 public class Arithmetic<X extends Number> {
-	private Class<X> targetClass;
+	private Class<? extends Number> targetClass;
+	private X value;
 	
-	private Arithmetic(Class<X> targetClass) {
-		this.targetClass = targetClass;
+	public Arithmetic(X value) {
+		this.targetClass = value.getClass();
+		this.value = value;
 	}
 	
-	public static <Y extends Number> Arithmetic<Y> create(Class<Y> targetClass) {
-		return new Arithmetic<Y>(targetClass);
+	public X value() {
+		return value;
 	}
 	
-	public <A extends Number, B extends Number> X add(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getAddition());
+	public <A extends Number, B extends Number> Arithmetic<X> add(A operand) {
+		value = binaryOperation(value, operand, Operations.getAddition());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X sub(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getSubtraction());
+	public <A extends Number, B extends Number> Arithmetic<X> sub(A operand) {
+		value = binaryOperation(value, operand, Operations.getSubtraction());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X div(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getDivision());
+	public <A extends Number, B extends Number> Arithmetic<X> div(A operand) {
+		value = binaryOperation(value, operand, Operations.getDivision());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X mul(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getMultiplication());
+	public <A extends Number, B extends Number> Arithmetic<X> mul(A operand) {
+		value = binaryOperation(value, operand, Operations.getMultiplication());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X max(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getMaximum());
+	public <A extends Number, B extends Number> Arithmetic<X> max(A operand) {
+		value = binaryOperation(value, operand, Operations.getMaximum());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X min(A a, B b) {
-		return binaryOperation(a, b, OperationRepository.getMinimum());
+	public <A extends Number, B extends Number> Arithmetic<X> min(A operand) {
+		value = binaryOperation(value, operand, Operations.getMinimum());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X abs(A a) {
-		return unaryOperation(a, OperationRepository.getAbsolute());
+	public <A extends Number, B extends Number> Arithmetic<X> abs() {
+		value = unaryOperation(value, Operations.getAbsolute());
+		return this;
 	}
 	
-	public <A extends Number, B extends Number> X neg(A a) {
-		return unaryOperation(a, OperationRepository.getNegation());
+	public <A extends Number, B extends Number> Arithmetic<X> neg() {
+		value = unaryOperation(value, Operations.getNegation());
+		return this;
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	private <A extends Number, B extends Number> X binaryOperation(A a, B b, BinaryOperation op) {
-		X value1 = convertNumber(a);
-		X value2 = convertNumber(b);
+	private <A extends Number, B extends Number> X binaryOperation(A operand1, B operand2, BinaryOperation operation) {
+		X value1 = convertNumber(operand1);
+		X value2 = convertNumber(operand2);
 		
 		if (targetClass.equals(Integer.class)) {
-			return (X) op.apply((Integer) value1, (Integer) value2);
+			return (X) operation.apply((Integer) value1, (Integer) value2);
 		} else if (targetClass.equals(Long.class)) {
-			return (X) op.apply((Long) value1, (Long) value2);
+			return (X) operation.apply((Long) value1, (Long) value2);
 		} else if (targetClass.equals(Short.class)) {
-			return (X) op.apply((Short) value1, (Short) value2);
+			return (X) operation.apply((Short) value1, (Short) value2);
 		} else if (targetClass.equals(Byte.class)) {
-			return (X) op.apply((Byte) value1, (Byte) value2);
+			return (X) operation.apply((Byte) value1, (Byte) value2);
 		} else if (targetClass.equals(Double.class)) {
-			return (X) op.apply((Double) value1, (Double) value2);
+			return (X) operation.apply((Double) value1, (Double) value2);
 		} else if (targetClass.equals(Float.class)) {
-			return (X) op.apply((Float) value1, (Float) value2);
+			return (X) operation.apply((Float) value1, (Float) value2);
 		} else if (targetClass.equals(BigInteger.class)) {
-			return (X) op.apply((BigInteger) value1, (BigInteger) value2);
+			return (X) operation.apply((BigInteger) value1, (BigInteger) value2);
 		} else if (targetClass.equals(BigDecimal.class)) {
-			return (X) op.apply((BigDecimal) value1, (BigDecimal) value2);
+			return (X) operation.apply((BigDecimal) value1, (BigDecimal) value2);
 		} else {
 			throw new InvalidParameterException("One of the parameters is of an invalid class");
 		}
 	}
 	
 	@SuppressWarnings({ "unchecked" })
-	private <A extends Number> X unaryOperation(A a, UnaryOperation op) {
-		X value1 = convertNumber(a);
+	private <A extends Number> X unaryOperation(A operand, UnaryOperation operation) {
+		X value1 = convertNumber(operand);
 		
 		if (targetClass.equals(Integer.class)) {
-			return (X) op.apply((Integer) value1);
+			return (X) operation.apply((Integer) value1);
 		} else if (targetClass.equals(Long.class)) {
-			return (X) op.apply((Long) value1);
+			return (X) operation.apply((Long) value1);
 		} else if (targetClass.equals(Short.class)) {
-			return (X) op.apply((Short) value1);
+			return (X) operation.apply((Short) value1);
 		} else if (targetClass.equals(Byte.class)) {
-			return (X) op.apply((Byte) value1);
+			return (X) operation.apply((Byte) value1);
 		} else if (targetClass.equals(Double.class)) {
-			return (X) op.apply((Double) value1);
+			return (X) operation.apply((Double) value1);
 		} else if (targetClass.equals(Float.class)) {
-			return (X) op.apply((Float) value1);
+			return (X) operation.apply((Float) value1);
 		} else if (targetClass.equals(BigInteger.class)) {
-			return (X) op.apply((BigInteger) value1);
+			return (X) operation.apply((BigInteger) value1);
 		} else if (targetClass.equals(BigDecimal.class)) {
-			return (X) op.apply((BigDecimal) value1);
+			return (X) operation.apply((BigDecimal) value1);
 		} else {
 			throw new InvalidParameterException("One of the parameters is of an invalid class");
 		}

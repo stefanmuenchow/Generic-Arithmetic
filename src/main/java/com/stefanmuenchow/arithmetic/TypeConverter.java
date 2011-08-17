@@ -39,7 +39,7 @@ class TypeConverter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	static <X extends Number> X convertNumber(Number n, Class<X> targetClass) {
+	static <X extends Number> X convertNumber(Number n, Class<? extends Number> targetClass) {
 		X result = null;
 		
 		if(n.getClass().equals(targetClass)) { // No conversion needed
@@ -58,7 +58,7 @@ class TypeConverter {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static <X extends Number> X convertGenericType(Number n, Class<X> targetClass) {
+	private static <X extends Number> X convertGenericType(Number n, Class<? extends Number> targetClass) {
 		String converterMethod = converterMethods.get(targetClass);
 		X result = null;
 		

@@ -16,61 +16,96 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class ArithmeticTest {
-	private Number[] numbers;
-	private Arithmetic<Short> shortArith;
-	private Arithmetic<Byte> byteArith;
-	private Arithmetic<Integer> intArith;
-	private Arithmetic<Long> longArith;
-	private Arithmetic<Float> floatArith;
-	private Arithmetic<Double> doubleArith;
-	private Arithmetic<BigInteger> bigIntArith;
-	private Arithmetic<BigDecimal> bigDecimalArith;
+	private final Number[] numbers = 
+		new Number[] { (short) 3, (byte) -5, 7, -9l, 11f, -13d, new BigInteger("15"), new BigDecimal(-17d) };
 	
-	@Before
-	public void setUp() {
-		numbers = new Number[] { (short) 3, (byte) -5, 7, -9l, 11f, -13d, new BigInteger("15"), new BigDecimal(-17d) };
+	@Test
+	public void testShortArithmetic() {
+		Arithmetic<Short> shortArith = new Arithmetic<Short>(numbers[0].shortValue());
 		
-		shortArith = Arithmetic.create(Short.class);
-		byteArith = Arithmetic.create(Byte.class);
-		intArith = Arithmetic.create(Integer.class);
-		longArith = Arithmetic.create(Long.class);
-		floatArith = Arithmetic.create(Float.class);
-		doubleArith = Arithmetic.create(Double.class);
-		bigIntArith = Arithmetic.create(BigInteger.class);
-		bigDecimalArith = Arithmetic.create(BigDecimal.class);
-	}
-
-	@Test
-	public void testAdd() {
 		for(Number a : numbers) {
-			for(Number b : numbers) {
-				assertEquals(Short.valueOf((short) (a.shortValue() + b.shortValue())), shortArith.add(a, b));
-				assertEquals(Byte.valueOf((byte) (a.byteValue() + b.byteValue())), byteArith.add(a, b));
-				assertEquals(Integer.valueOf((int) (a.intValue() + b.intValue())), intArith.add(a, b));
-				assertEquals(Long.valueOf((long) (a.longValue() + b.longValue())), longArith.add(a, b));
-				assertEquals(Float.valueOf((float) (a.floatValue() + b.floatValue())), floatArith.add(a, b));
-				assertEquals(Double.valueOf((double) (a.doubleValue() + b.doubleValue())), doubleArith.add(a, b));
-				assertEquals(new BigInteger(Integer.valueOf(a.intValue() + b.intValue()).toString()), bigIntArith.add(a, b));
-				assertEquals(new BigDecimal(Double.valueOf(a.doubleValue() + b.doubleValue())), bigDecimalArith.add(a, b));
-			}
+			assertEquals(Short.valueOf((short) (shortArith.value() + a.shortValue())), shortArith.add(a).value());
 		}
 	}
-
+	
 	@Test
-	public void testAbs() {
+	public void testByteArithmetic() {
+		Arithmetic<Byte> byteArith = new Arithmetic<Byte>(numbers[1].byteValue());
+		
 		for(Number a : numbers) {
-			assertEquals(Short.valueOf(Integer.valueOf(Math.abs(a.intValue())).shortValue()), shortArith.abs(a));
-			assertEquals(Byte.valueOf(Integer.valueOf(Math.abs(a.intValue())).byteValue()), byteArith.abs(a));
-			assertEquals(Integer.valueOf(Math.abs(a.intValue())), intArith.abs(a));
-			assertEquals(Long.valueOf(Math.abs(a.longValue())), longArith.abs(a));
-			assertEquals(Float.valueOf(Math.abs(a.floatValue())), floatArith.abs(a));
-			assertEquals(Double.valueOf(Math.abs(a.doubleValue())), doubleArith.abs(a));
-			assertEquals(new BigInteger(Long.valueOf(a.longValue()).toString()).abs(), bigIntArith.abs(a));
-			assertEquals(new BigDecimal(a.doubleValue()).abs(), bigDecimalArith.abs(a));
+			assertEquals(Byte.valueOf((byte) (byteArith.value() + a.byteValue())), byteArith.add(a).value());
 		}
+	}
+	
+	@Test
+	public void testIntArithmetic() {
+		Arithmetic<Integer> intArith = new Arithmetic<Integer>(numbers[2].intValue());
+		
+		for(Number a : numbers) {
+			assertEquals(Integer.valueOf(intArith.value() + a.intValue()), intArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testLongArithmetic() {
+		Arithmetic<Long> longArith = new Arithmetic<Long>(numbers[3].longValue());
+		
+		for(Number a : numbers) {
+			assertEquals(Long.valueOf(longArith.value() + a.longValue()), longArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testFloatArithmetic() {
+		Arithmetic<Float> floatArith = new Arithmetic<Float>(numbers[4].floatValue());
+		
+		for(Number a : numbers) {
+			assertEquals(Float.valueOf(floatArith.value() + a.floatValue()), floatArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testDoubleArithmetic() {
+		Arithmetic<Double> doubleArith = new Arithmetic<Double>(numbers[5].doubleValue());
+		
+		for(Number a : numbers) {
+			assertEquals(Double.valueOf(doubleArith.value() + a.doubleValue()), doubleArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testBigIntArithmetic() {
+		Arithmetic<BigInteger> bigIntArith = new Arithmetic<BigInteger>((BigInteger) numbers[6]);
+		
+		for(Number a : numbers) {
+			assertEquals(new BigInteger(Long.valueOf(bigIntArith.value().longValue() + a.longValue()).toString()), 
+						 bigIntArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testBigDecimalArithmetic() {
+		Arithmetic<BigDecimal> bigDecimalArith = new Arithmetic<BigDecimal>((BigDecimal) numbers[7]);
+		
+		for(Number a : numbers) {
+			assertEquals(new BigDecimal(bigDecimalArith.value().doubleValue() + a.doubleValue()), 
+						 bigDecimalArith.add(a).value());
+		}
+	}
+	
+	@Test
+	public void testCalculateAverage() {
+		Arithmetic<Double> doubleArithmetic = new Arithmetic<Double>(0d);
+		
+		for(Number a : numbers) {
+			doubleArithmetic.add(a);
+		}
+		
+		Double result = doubleArithmetic.div(numbers.length).value();
+		
+		assertEquals(Double.valueOf(-1), result);
 	}
 }

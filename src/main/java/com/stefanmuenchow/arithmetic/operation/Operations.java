@@ -11,7 +11,7 @@
 
 package com.stefanmuenchow.arithmetic.operation;
 
-public class OperationRepository {
+public class Operations {
 	private static BinaryOperation addition = new Addition();
 	private static BinaryOperation division = new Division();
 	private static BinaryOperation maximum = new Maximum();
@@ -21,7 +21,7 @@ public class OperationRepository {
 	private static UnaryOperation absolute = new Absolute();
 	private static UnaryOperation negation = new Negation();
 	
-	private OperationRepository() {
+	private Operations() {
 	}
 
 	public static BinaryOperation getAddition() {
