@@ -27,10 +27,16 @@ import com.stefanmuenchow.arithmetic.operation.UnaryOperation;
 public class Arithmetic<X extends Number> {
 	private Class<? extends Number> targetClass;
 	private X value;
+	private final TypeConverter typeConverter;
 	
-	public Arithmetic(X value) {
+	public Arithmetic(X value, TypeConverter typeConverter) {
 		this.targetClass = value.getClass();
 		this.value = value;
+		this.typeConverter = typeConverter;
+	}
+	
+	public Arithmetic(X value) {
+		this(value, new BasicTypeConverter());
 	}
 	
 	public X value() {
@@ -129,6 +135,6 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	private X convertNumber(Number n) {
-		return TypeConverter.convertNumber(n, targetClass);
+		return typeConverter.convertNumber(n, targetClass);
 	}
 }
