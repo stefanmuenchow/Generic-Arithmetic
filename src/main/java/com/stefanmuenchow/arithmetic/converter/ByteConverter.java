@@ -1,5 +1,7 @@
 package com.stefanmuenchow.arithmetic.converter;
 
+import com.stefanmuenchow.arithmetic.TypeConverter;
+
 public class ByteConverter implements TypeConverter<Byte> {
 
 	@Override

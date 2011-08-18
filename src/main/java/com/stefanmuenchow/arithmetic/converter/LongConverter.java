@@ -1,5 +1,7 @@
 package com.stefanmuenchow.arithmetic.converter;
 
+import com.stefanmuenchow.arithmetic.TypeConverter;
+
 public class LongConverter implements TypeConverter<Long> {
 
 	@Override

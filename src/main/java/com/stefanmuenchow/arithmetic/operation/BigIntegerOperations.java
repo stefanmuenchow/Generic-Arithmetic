@@ -2,6 +2,8 @@ package com.stefanmuenchow.arithmetic.operation;
 
 import java.math.BigInteger;
 
+import com.stefanmuenchow.arithmetic.Operations;
+
 public class BigIntegerOperations implements Operations<BigInteger> {
 
 	@Override

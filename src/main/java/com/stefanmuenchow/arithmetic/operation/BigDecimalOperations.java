@@ -2,6 +2,8 @@ package com.stefanmuenchow.arithmetic.operation;
 
 import java.math.BigDecimal;
 
+import com.stefanmuenchow.arithmetic.Operations;
+
 public class BigDecimalOperations implements Operations<BigDecimal> {
 
 	@Override

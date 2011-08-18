@@ -2,6 +2,8 @@ package com.stefanmuenchow.arithmetic.converter;
 
 import java.math.BigDecimal;
 
+import com.stefanmuenchow.arithmetic.TypeConverter;
+
 public class BigDecimalConverter implements TypeConverter<BigDecimal> {
 
 	@Override

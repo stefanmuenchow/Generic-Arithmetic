@@ -5,6 +5,8 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.stefanmuenchow.arithmetic.Operations;
+
 public class OperationsRepository {
 	private static OperationsRepository instance;
 	private final Map<Class<?>, Operations<?>> operations;

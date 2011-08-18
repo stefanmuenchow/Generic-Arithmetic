@@ -1,5 +1,7 @@
 package com.stefanmuenchow.arithmetic.operation;
 
+import com.stefanmuenchow.arithmetic.Operations;
+
 public class ByteOperations implements Operations<Byte> {
 
 	@Override

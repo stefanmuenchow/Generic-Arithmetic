@@ -16,6 +16,8 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.stefanmuenchow.arithmetic.TypeConverter;
+
 
 /**
  * Converts objects from subclasses of {@link Number} to a specified target class.

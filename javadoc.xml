@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" additionalparam="-encoding UTF-8 -charset UTF-8 -docencoding UTF-8" author="true" classpath="/home/stefan/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar" destdir="doc" doctitle="Generic-Arithmetic API Documentation" nodeprecated="true" nodeprecatedlist="true" noindex="false" nonavbar="true" notree="true" overview="/home/stefan/workspace/Arithemtic/overview.html" packagenames="com.stefanmuenchow.arithmetic" source="1.6" sourcepath="src/main/java" splitindex="true" use="true" version="false">
+            <link href="http://java.sun.com/javase/6/docs/api/"/>
+        </javadoc>
+    </target>
+</project>
