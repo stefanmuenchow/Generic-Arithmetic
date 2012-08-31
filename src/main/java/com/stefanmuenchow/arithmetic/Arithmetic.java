@@ -20,7 +20,7 @@ import com.stefanmuenchow.arithmetic.operation.OperationsRepository;
  * @author Stefan Münchow
  */
 public class Arithmetic<X extends Number> {
-	private Class<? extends Number> targetClass;
+	private Class<X> targetClass;
 	private X value;
 	
 	/**
@@ -43,8 +43,9 @@ public class Arithmetic<X extends Number> {
 	 * 
 	 * @param value	Initial value
 	 */
+    @SuppressWarnings("unchecked")
 	public Arithmetic(X value) {
-		this.targetClass = value.getClass();
+		this.targetClass = (Class<X>) value.getClass();
 		this.value = value;
 	}
 	
@@ -149,14 +150,20 @@ public class Arithmetic<X extends Number> {
 		value = getOperations().neg(value);
 		return this;
 	}
-	
-	@SuppressWarnings("unchecked")
+
+    private transient TypeConverter<X> converter;
+
 	private X convertNumber(Number n) {
-		return (X) ConverterRepository.getInstance().getConverter(targetClass).convertNumber(n);
+        if(converter == null)
+            converter = ConverterRepository.getInstance().getConverter(targetClass);
+		return converter.convertNumber(n);
 	}
-	
-	@SuppressWarnings("unchecked")
+
+    private transient Operations<X> operations;
+
 	private Operations<X> getOperations() {
-		return (Operations<X>) OperationsRepository.getInstance().getOperations(targetClass);
+        if(operations == null)
+            operations = OperationsRepository.getInstance().getOperations(targetClass);
+        return operations;
 	}
 }
