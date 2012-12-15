@@ -4,6 +4,8 @@
 For further information see http://www.stefanmuenchow.com/projekte/generic-arithmetic/. There
 you will find a tutorial (in german) and the Javadocs.
 
+Generic-Arithmetic will be available in Maven Central repository soon!
+
 ## Licensing
 Copyright (c) Stefan Münchow. All rights reserved.
 
