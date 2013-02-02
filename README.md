@@ -6,6 +6,19 @@ you will find a tutorial (in german) and the Javadocs.
 
 Generic-Arithmetic will be available in Maven Central repository soon!
 
+```java
+Number[] numbers = new Number[] {
+    (short) 3, (byte) -5, 7, -9l, 11f, -13d, new BigInteger("15"), new BigDecimal(-17d) };
+
+Arithmetic<Double> doubleArithmetic = new Arithmetic<Double>(0d);
+
+for(Number a : numbers) {
+    doubleArithmetic.add(a);
+}
+
+Double result = doubleArithmetic.div(numbers.length).value();
+´´´
+
 ## Licensing
 Copyright (c) Stefan Münchow. All rights reserved.
 
