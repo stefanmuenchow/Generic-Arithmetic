@@ -2,9 +2,7 @@ package com.stefanmuenchow.arithmetic.operation;
 
 import java.math.BigDecimal;
 
-import com.stefanmuenchow.arithmetic.Operations;
-
-public class BigDecimalOperations implements Operations<BigDecimal> {
+public class BigDecimalOperations extends FloatingPointOperations<BigDecimal> {
 
 	@Override
 	public BigDecimal add(BigDecimal a, BigDecimal b) {
@@ -24,6 +22,11 @@ public class BigDecimalOperations implements Operations<BigDecimal> {
 	@Override
 	public BigDecimal div(BigDecimal a, BigDecimal b) {
 		return a.divide(b);
+	}
+	
+	@Override
+	public BigDecimal rem(BigDecimal a, BigDecimal b) {
+		return a.remainder(b);
 	}
 
 	@Override
@@ -45,4 +48,11 @@ public class BigDecimalOperations implements Operations<BigDecimal> {
 	public BigDecimal neg(BigDecimal a) {
 		return a.negate();
 	}
+
+	@Override
+	public int compare(BigDecimal a, BigDecimal b)
+	{
+		return a.compareTo(b);
+	}
+
 }

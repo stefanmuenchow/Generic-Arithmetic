@@ -11,13 +11,16 @@
 
 package com.stefanmuenchow.arithmetic;
 
+import java.math.BigInteger;
+
 /**
  * Provides operations for a specified numerical data type.
  * 
  * @author Stefan Münchow
+ * @author Matthias Stevens
  * @param <X>	Operand and result type
  */
-public interface Operations<X extends Number> {
+public interface Operations<X extends Number & Comparable<X>> {
 	
 	/**
 	 * Add b to a.
@@ -56,6 +59,15 @@ public interface Operations<X extends Number> {
 	X div(X a, X b);
 	
 	/**
+	 * Returns the the remainder of integer division of a by b (i.e. the result of {@code a % b}).
+	 * 
+	 * @param a a
+	 * @param b b
+	 * @return	result
+	 */
+	X rem(X a, X b);
+	
+	/**
 	 * Returns the maximum value of a and b.
 	 * 
 	 * @param a a
@@ -88,4 +100,81 @@ public interface Operations<X extends Number> {
 	 * @return	-a
 	 */
 	X neg(X a);
+	
+	/**
+	 * Bitwise left shift (<<).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X shiftLeft(X a, X b);
+	
+	/**
+	 * Bitwise right shift (>>).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X shiftRight(X a, X b);
+	
+	/**
+	 * Bitwise unsigned right shift (>>>).<br/>
+	 * Only supported for integer types, except {@link BigInteger}.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X shiftUnsignedRight(X a, X b);
+	
+	/**
+	 * Bitwise AND (&).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X and(X a, X b);
+	
+	/**
+	 * Bitwise inclusive OR (|).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X or(X a, X b);
+	
+	/**
+	 * Bitwise exclusive OR (^).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X xor(X a, X b);
+	
+	/**
+	 * Unary bitwise complement (~).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @return
+	 */
+	X complement(X a);
+	
+	/**
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	int compare(X a, X b);
+	
 }

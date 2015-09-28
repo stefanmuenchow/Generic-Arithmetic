@@ -1,8 +1,6 @@
 package com.stefanmuenchow.arithmetic.operation;
 
-import com.stefanmuenchow.arithmetic.Operations;
-
-public class FloatOperations implements Operations<Float> {
+public class FloatOperations extends FloatingPointOperations<Float> {
 
 	@Override
 	public Float add(Float a, Float b) {
@@ -25,6 +23,11 @@ public class FloatOperations implements Operations<Float> {
 	}
 
 	@Override
+	public Float rem(Float a, Float b) {
+		return a % b;
+	}
+	
+	@Override
 	public Float max(Float a, Float b) {
 		return Math.max(a, b);
 	}
@@ -43,4 +46,11 @@ public class FloatOperations implements Operations<Float> {
 	public Float neg(Float a) {
 		return a * (-1);
 	}
+
+	@Override
+	public int compare(Float a, Float b)
+	{
+		return a.compareTo(b);
+	}
+
 }

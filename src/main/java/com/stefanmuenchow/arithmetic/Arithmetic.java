@@ -18,8 +18,11 @@ import com.stefanmuenchow.arithmetic.operation.OperationsRepository;
  * Provides generic arithmetic for all subclasses of class {@link Number}.
  *  
  * @author Stefan Münchow
+ * @author Matthias Stevens
+ *
+ * @param <X> target type
  */
-public class Arithmetic<X extends Number> {
+public class Arithmetic<X extends Number & Comparable<X>> {
 	private Class<X> targetClass;
 	private X value;
 	
@@ -32,7 +35,7 @@ public class Arithmetic<X extends Number> {
 	 * @param converter		{@link TypeConverter} for target type
 	 * @param operations	{@link Operations} for target type
 	 */
-	public static <Y extends Number> void addTargetType(Class<Y> targetType, 
+	public static <Y extends Number & Comparable<Y>> void addTargetType(Class<Y> targetType, 
 			TypeConverter<Y> converter, Operations<Y> operations) {
 		ConverterRepository.getInstance().addConverter(targetType, converter);
 		OperationsRepository.getInstance().addOperations(targetType, operations);
@@ -50,7 +53,7 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	/**
-	 * Return current value of this instace.
+	 * Return current value of this instance.
 	 * @return	Current value of type X.
 	 */
 	public X value() {
@@ -94,6 +97,18 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	/**
+	 * Compute the remainder of integer division of current value of this instance by operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with modified value
+	 */
+	public <A extends Number> Arithmetic<X> rem(A operand) {
+		value = getOperations().rem(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
 	 * Multiply current value of this instance with operand.
 	 * 
 	 * @param <A>		Operand type
@@ -132,10 +147,9 @@ public class Arithmetic<X extends Number> {
 	/**
 	 * Create absolute of the current value of this instance.
 	 * 
-	 * @param <A>		Operand type
 	 * @return			{@link Arithmetic} with absolute value
 	 */
-	public <A extends Number> Arithmetic<X> abs() {
+	public Arithmetic<X> abs() {
 		value = getOperations().abs(value);
 		return this;
 	}
@@ -143,27 +157,120 @@ public class Arithmetic<X extends Number> {
 	/**
 	 * Negate the current value of this instance.
 	 * 
-	 * @param <A>		Operand type
 	 * @return			{@link Arithmetic} with negated value
 	 */
-	public <A extends Number> Arithmetic<X> neg() {
+	public Arithmetic<X> neg() {
 		value = getOperations().neg(value);
 		return this;
 	}
-
-    private transient TypeConverter<X> converter;
-
+	
+	/**
+	 * Shift current value of this instance to the left by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() << operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftLeft(A operand) {
+		value = getOperations().shiftLeft(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Shift current value of this instance to the right by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() >> operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftRight(A operand) {
+		value = getOperations().shiftRight(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Shift current value of this instance to the right (unsigned) by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() >>> operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftUnsignedRight(A operand) {
+		value = getOperations().shiftUnsignedRight(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise AND to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() & operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> and(A operand) {
+		value = getOperations().and(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise inclusive OR to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() | operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> or(A operand) {
+		value = getOperations().or(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise exclusive OR to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() ^ operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> xor(A operand) {
+		value = getOperations().xor(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise complement to the current value of this instance.
+	 * 
+	 * @return			{@link Arithmetic} with {@code ~(this.value())} as new value
+	 */
+	public Arithmetic<X> complement() {
+		value = getOperations().complement(value);
+		return this;
+	}
+	
+	/**
+	 * Compares current value of this instance with the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			result of {@code this.value().compareTo(operand)}
+	 */
+	public <A extends Number> int compareTo(A operand) {
+		return getOperations().compare(value, convertNumber(operand));
+	}
+	
+	private transient TypeConverter<X> converter;
+	
 	private X convertNumber(Number n) {
-        if(converter == null)
-            converter = ConverterRepository.getInstance().getConverter(targetClass);
+		if(converter == null)
+			converter = ConverterRepository.getInstance().getConverter(targetClass);
 		return converter.convertNumber(n);
 	}
-
-    private transient Operations<X> operations;
-
+	
+	private transient Operations<X> operations;
+	
 	private Operations<X> getOperations() {
-        if(operations == null)
-            operations = OperationsRepository.getInstance().getOperations(targetClass);
-        return operations;
+		if(operations == null)
+			operations = OperationsRepository.getInstance().getOperations(targetClass);
+		return operations;
 	}
+	
 }

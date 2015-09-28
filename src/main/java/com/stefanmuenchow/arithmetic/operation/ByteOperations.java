@@ -25,6 +25,11 @@ public class ByteOperations implements Operations<Byte> {
 	}
 
 	@Override
+	public Byte rem(Byte a, Byte b) {
+		return (byte) (a % b);
+	}
+	
+	@Override
 	public Byte max(Byte a, Byte b) {
 		return (byte) Math.max(a, b);
 	}
@@ -43,4 +48,46 @@ public class ByteOperations implements Operations<Byte> {
 	public Byte neg(Byte a) {
 		return (byte) (a * (-1));
 	}
+
+	@Override
+	public Byte shiftLeft(Byte a, Byte b) {
+		return (byte) (a << b);
+	}
+
+	@Override
+	public Byte shiftRight(Byte a, Byte b) {
+		return (byte) (a >> b);
+	}
+
+	@Override
+	public Byte shiftUnsignedRight(Byte a, Byte b) {
+		return (byte) (a >>> b);
+	}
+	
+	@Override
+	public Byte and(Byte a, Byte b) {
+		return (byte) (a & b);
+	}
+
+	@Override
+	public Byte or(Byte a, Byte b) {
+		return (byte) (a | b);
+	}
+
+	@Override
+	public Byte xor(Byte a, Byte b) {
+		return (byte) (a ^ b);
+	}
+
+	@Override
+	public Byte complement(Byte a) {
+		return (byte) (~a);
+	}
+
+	@Override
+	public int compare(Byte a, Byte b)
+	{
+		return a.compareTo(b);
+	}
+
 }
