@@ -18,6 +18,9 @@ import com.stefanmuenchow.arithmetic.operation.OperationsRepository;
  * Provides generic arithmetic for all subclasses of class {@link Number}.
  *  
  * @author Stefan Münchow
+ * @author Matthias Stevens
+ *
+ * @param <X> target type
  */
 public class Arithmetic<X extends Number> {
 	private Class<X> targetClass;
@@ -50,7 +53,7 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	/**
-	 * Return current value of this instace.
+	 * Return current value of this instance.
 	 * @return	Current value of type X.
 	 */
 	public X value() {
@@ -132,10 +135,9 @@ public class Arithmetic<X extends Number> {
 	/**
 	 * Create absolute of the current value of this instance.
 	 * 
-	 * @param <A>		Operand type
 	 * @return			{@link Arithmetic} with absolute value
 	 */
-	public <A extends Number> Arithmetic<X> abs() {
+	public Arithmetic<X> abs() {
 		value = getOperations().abs(value);
 		return this;
 	}
@@ -143,27 +145,27 @@ public class Arithmetic<X extends Number> {
 	/**
 	 * Negate the current value of this instance.
 	 * 
-	 * @param <A>		Operand type
 	 * @return			{@link Arithmetic} with negated value
 	 */
-	public <A extends Number> Arithmetic<X> neg() {
+	public Arithmetic<X> neg() {
 		value = getOperations().neg(value);
 		return this;
 	}
 
-    private transient TypeConverter<X> converter;
-
+	private transient TypeConverter<X> converter;
+	
 	private X convertNumber(Number n) {
-        if(converter == null)
-            converter = ConverterRepository.getInstance().getConverter(targetClass);
+		if(converter == null)
+			converter = ConverterRepository.getInstance().getConverter(targetClass);
 		return converter.convertNumber(n);
 	}
-
-    private transient Operations<X> operations;
-
+	
+	private transient Operations<X> operations;
+	
 	private Operations<X> getOperations() {
-        if(operations == null)
-            operations = OperationsRepository.getInstance().getOperations(targetClass);
-        return operations;
+		if(operations == null)
+			operations = OperationsRepository.getInstance().getOperations(targetClass);
+		return operations;
 	}
+	
 }
