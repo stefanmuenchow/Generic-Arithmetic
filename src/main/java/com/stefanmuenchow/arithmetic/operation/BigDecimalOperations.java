@@ -25,6 +25,11 @@ public class BigDecimalOperations implements Operations<BigDecimal> {
 	public BigDecimal div(BigDecimal a, BigDecimal b) {
 		return a.divide(b);
 	}
+	
+	@Override
+	public BigDecimal rem(BigDecimal a, BigDecimal b) {
+		return a.remainder(b);
+	}
 
 	@Override
 	public BigDecimal max(BigDecimal a, BigDecimal b) {
@@ -45,4 +50,5 @@ public class BigDecimalOperations implements Operations<BigDecimal> {
 	public BigDecimal neg(BigDecimal a) {
 		return a.negate();
 	}
+
 }

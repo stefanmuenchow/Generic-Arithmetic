@@ -25,6 +25,11 @@ public class ShortOperations implements Operations<Short> {
 	}
 
 	@Override
+	public Short rem(Short a, Short b) {
+		return (short) (a % b);
+	}
+	
+	@Override
 	public Short max(Short a, Short b) {
 		return (short) Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class ShortOperations implements Operations<Short> {
 	public Short neg(Short a) {
 		return (short) (a * (-1));
 	}
+
 }

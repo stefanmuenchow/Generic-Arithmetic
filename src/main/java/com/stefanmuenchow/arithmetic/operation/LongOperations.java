@@ -25,6 +25,11 @@ public class LongOperations implements Operations<Long> {
 	}
 
 	@Override
+	public Long rem(Long a, Long b) {
+		return a % b;
+	}
+	
+	@Override
 	public Long max(Long a, Long b) {
 		return Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class LongOperations implements Operations<Long> {
 	public Long neg(Long a) {
 		return a * (-1);
 	}
+
 }

@@ -25,6 +25,11 @@ public class DoubleOperations implements Operations<Double> {
 	}
 
 	@Override
+	public Double rem(Double a, Double b) {
+		return a % b;
+	}
+	
+	@Override
 	public Double max(Double a, Double b) {
 		return Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class DoubleOperations implements Operations<Double> {
 	public Double neg(Double a) {
 		return a * (-1);
 	}
+
 }

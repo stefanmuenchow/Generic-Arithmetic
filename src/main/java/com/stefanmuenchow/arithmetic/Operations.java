@@ -15,6 +15,7 @@ package com.stefanmuenchow.arithmetic;
  * Provides operations for a specified numerical data type.
  * 
  * @author Stefan Münchow
+ * @author Matthias Stevens
  * @param <X>	Operand and result type
  */
 public interface Operations<X extends Number> {
@@ -56,6 +57,15 @@ public interface Operations<X extends Number> {
 	X div(X a, X b);
 	
 	/**
+	 * Returns the the remainder of integer division of a by b (i.e. the result of {@code a % b}).
+	 * 
+	 * @param a a
+	 * @param b b
+	 * @return	result
+	 */
+	X rem(X a, X b);
+	
+	/**
 	 * Returns the maximum value of a and b.
 	 * 
 	 * @param a a
@@ -88,4 +98,5 @@ public interface Operations<X extends Number> {
 	 * @return	-a
 	 */
 	X neg(X a);
+	
 }

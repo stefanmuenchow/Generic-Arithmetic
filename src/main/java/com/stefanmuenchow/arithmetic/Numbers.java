@@ -99,6 +99,14 @@ public class Numbers
 	}
 
 	/**
+	 * @see Operations#rem(Number, Number)
+	 */
+	static public Number rem(Number a, Number b)
+	{
+		return getArithmetic(a, b).rem(b).value();
+	}
+	
+	/**
 	 * @see Operations#max(Number, Number)
 	 */
 	static public Number max(Number a, Number b)

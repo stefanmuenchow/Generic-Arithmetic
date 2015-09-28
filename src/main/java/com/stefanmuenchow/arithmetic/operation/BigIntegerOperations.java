@@ -27,6 +27,11 @@ public class BigIntegerOperations implements Operations<BigInteger> {
 	}
 
 	@Override
+	public BigInteger rem(BigInteger a, BigInteger b) {
+		return a.remainder(b);
+	}
+	
+	@Override
 	public BigInteger max(BigInteger a, BigInteger b) {
 		return a.max(b);
 	}
@@ -45,4 +50,5 @@ public class BigIntegerOperations implements Operations<BigInteger> {
 	public BigInteger neg(BigInteger a) {
 		return a.negate();
 	}
+
 }

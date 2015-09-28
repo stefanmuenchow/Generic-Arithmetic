@@ -25,6 +25,11 @@ public class FloatOperations implements Operations<Float> {
 	}
 
 	@Override
+	public Float rem(Float a, Float b) {
+		return a % b;
+	}
+	
+	@Override
 	public Float max(Float a, Float b) {
 		return Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class FloatOperations implements Operations<Float> {
 	public Float neg(Float a) {
 		return a * (-1);
 	}
+
 }

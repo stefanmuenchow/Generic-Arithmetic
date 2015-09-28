@@ -25,6 +25,11 @@ public class IntegerOperations implements Operations<Integer> {
 	}
 
 	@Override
+	public Integer rem(Integer a, Integer b) {
+		return a % b;
+	}
+	
+	@Override
 	public Integer max(Integer a, Integer b) {
 		return Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class IntegerOperations implements Operations<Integer> {
 	public Integer neg(Integer a) {
 		return a * (-1);
 	}
+
 }

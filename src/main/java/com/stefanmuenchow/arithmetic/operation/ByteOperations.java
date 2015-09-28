@@ -25,6 +25,11 @@ public class ByteOperations implements Operations<Byte> {
 	}
 
 	@Override
+	public Byte rem(Byte a, Byte b) {
+		return (byte) (a % b);
+	}
+	
+	@Override
 	public Byte max(Byte a, Byte b) {
 		return (byte) Math.max(a, b);
 	}
@@ -43,4 +48,5 @@ public class ByteOperations implements Operations<Byte> {
 	public Byte neg(Byte a) {
 		return (byte) (a * (-1));
 	}
+
 }

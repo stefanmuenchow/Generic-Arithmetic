@@ -97,6 +97,18 @@ public class Arithmetic<X extends Number> {
 	}
 	
 	/**
+	 * Compute the remainder of integer division of current value of this instance by operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with modified value
+	 */
+	public <A extends Number> Arithmetic<X> rem(A operand) {
+		value = getOperations().rem(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
 	 * Multiply current value of this instance with operand.
 	 * 
 	 * @param <A>		Operand type
