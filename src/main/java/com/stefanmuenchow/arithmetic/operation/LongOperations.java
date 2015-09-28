@@ -49,4 +49,10 @@ public class LongOperations implements Operations<Long> {
 		return a * (-1);
 	}
 
+	@Override
+	public int compare(Long a, Long b)
+	{
+		return a.compareTo(b);
+	}
+
 }

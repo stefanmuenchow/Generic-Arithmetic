@@ -49,4 +49,10 @@ public class IntegerOperations implements Operations<Integer> {
 		return a * (-1);
 	}
 
+	@Override
+	public int compare(Integer a, Integer b)
+	{
+		return a.compareTo(b);
+	}
+
 }

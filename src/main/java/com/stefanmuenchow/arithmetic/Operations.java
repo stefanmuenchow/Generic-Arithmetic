@@ -18,7 +18,7 @@ package com.stefanmuenchow.arithmetic;
  * @author Matthias Stevens
  * @param <X>	Operand and result type
  */
-public interface Operations<X extends Number> {
+public interface Operations<X extends Number & Comparable<X>> {
 	
 	/**
 	 * Add b to a.
@@ -98,5 +98,17 @@ public interface Operations<X extends Number> {
 	 * @return	-a
 	 */
 	X neg(X a);
+	
+	/**
+	 * Performs numerical comparison of a and b.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 * 
+	 * @see {@link Double#compareTo(Double)}
+	 * @see {@link Long#compareTo(Long)}
+	 */
+	int compare(X a, X b);
 	
 }

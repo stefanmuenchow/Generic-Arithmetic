@@ -51,4 +51,10 @@ public class BigDecimalOperations implements Operations<BigDecimal> {
 		return a.negate();
 	}
 
+	@Override
+	public int compare(BigDecimal a, BigDecimal b)
+	{
+		return a.compareTo(b);
+	}
+
 }

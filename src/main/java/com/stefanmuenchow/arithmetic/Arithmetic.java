@@ -22,7 +22,7 @@ import com.stefanmuenchow.arithmetic.operation.OperationsRepository;
  *
  * @param <X> target type
  */
-public class Arithmetic<X extends Number> {
+public class Arithmetic<X extends Number & Comparable<X>> {
 	private Class<X> targetClass;
 	private X value;
 	
@@ -35,7 +35,7 @@ public class Arithmetic<X extends Number> {
 	 * @param converter		{@link TypeConverter} for target type
 	 * @param operations	{@link Operations} for target type
 	 */
-	public static <Y extends Number> void addTargetType(Class<Y> targetType, 
+	public static <Y extends Number & Comparable<Y>> void addTargetType(Class<Y> targetType, 
 			TypeConverter<Y> converter, Operations<Y> operations) {
 		ConverterRepository.getInstance().addConverter(targetType, converter);
 		OperationsRepository.getInstance().addOperations(targetType, operations);
@@ -163,7 +163,18 @@ public class Arithmetic<X extends Number> {
 		value = getOperations().neg(value);
 		return this;
 	}
-
+	
+	/**
+	 * Compares current value of this instance with the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			result of {@code this.value().compareTo(operand)}
+	 */
+	public <A extends Number> int compareTo(A operand) {
+		return getOperations().compare(value, convertNumber(operand));
+	}
+	
 	private transient TypeConverter<X> converter;
 	
 	private X convertNumber(Number n) {

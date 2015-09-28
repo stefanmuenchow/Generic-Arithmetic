@@ -49,4 +49,10 @@ public class DoubleOperations implements Operations<Double> {
 		return a * (-1);
 	}
 
+	@Override
+	public int compare(Double a, Double b)
+	{
+		return a.compareTo(b);
+	}
+
 }

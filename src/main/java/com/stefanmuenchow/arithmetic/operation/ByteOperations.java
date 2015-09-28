@@ -49,4 +49,10 @@ public class ByteOperations implements Operations<Byte> {
 		return (byte) (a * (-1));
 	}
 
+	@Override
+	public int compare(Byte a, Byte b)
+	{
+		return a.compareTo(b);
+	}
+
 }

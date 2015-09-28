@@ -51,4 +51,10 @@ public class BigIntegerOperations implements Operations<BigInteger> {
 		return a.negate();
 	}
 
+	@Override
+	public int compare(BigInteger a, BigInteger b)
+	{
+		return a.compareTo(b);
+	}
+
 }

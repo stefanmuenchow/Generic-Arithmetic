@@ -138,4 +138,12 @@ public class Numbers
 		return getArithmetic(n).neg().value();
 	}
 
+	/**
+	 * @see Operations#compare(Number, Number)
+	 */
+	static public <N extends Number & Comparable<N>, M extends Number & Comparable<M>> int compare(N a, M b)
+	{
+		return getArithmetic(a, b).compareTo(b);
+	}
+
 }

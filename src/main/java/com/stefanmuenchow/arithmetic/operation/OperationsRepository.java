@@ -32,7 +32,7 @@ public class OperationsRepository {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <X extends Number> Operations<X> getOperations(Class<X> targetClass) {
+	public <X extends Number & Comparable<X>> Operations<X> getOperations(Class<X> targetClass) {
 		Operations<X> result = (Operations<X>) operations.get(targetClass);
 		
 		if (result == null) {
@@ -42,7 +42,8 @@ public class OperationsRepository {
 		}
 	}
 	
-	public <X extends Number> void addOperations(Class<X> targetClass, Operations<X> operation) {
+	public <X extends Number & Comparable<X>> void addOperations(Class<X> targetClass, Operations<X> operation) {
 		operations.put(targetClass, operation);
 	}
+	
 }

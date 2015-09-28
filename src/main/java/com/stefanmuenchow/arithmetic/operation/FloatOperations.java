@@ -49,4 +49,10 @@ public class FloatOperations implements Operations<Float> {
 		return a * (-1);
 	}
 
+	@Override
+	public int compare(Float a, Float b)
+	{
+		return a.compareTo(b);
+	}
+
 }
