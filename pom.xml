@@ -4,11 +4,41 @@
 
 	<groupId>com.stefanmuenchow</groupId>
 	<artifactId>generic-arithmetic</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Generic-Arithmetic</name>
-	<url>http://www.stefanmuenchow.com</url>
+	<url>http://github.com/mstevens83/Generic-Arithmetic</url>
+
+	<licenses>
+		<license>Eclipse Public License v1.0</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Stefan Münchow</name>
+			<id>stefanmuenchow</id>
+			<email>stefanmuenchow at gmx.de</email>
+		</developer>
+		<developer>
+			<name>Julien Poumailloux</name>
+			<id>thebrowser</id>
+		</developer>
+		<developer>
+			<name>Bogdan Mart</name>
+			<id>Mart-Bogdan</id>
+		</developer>
+		<developer>
+			<name>Matthias Stevens</name>
+			<id>mstevens83</id>
+		</developer>		
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/mstevens83/Generic-Arithmetic.git</connection>
+		<developerConnection>scm:git:git@github.com:mstevens83/Generic-Arithmetic.git</developerConnection>
+		<url>http://github.com/mstevens83/Generic-Arithmetic</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,7 +48,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
