@@ -50,6 +50,48 @@ public class IntegerOperations implements Operations<Integer> {
 	}
 
 	@Override
+	public Integer shiftLeft(Integer a, Integer b)
+	{
+		return a << b;
+	}
+
+	@Override
+	public Integer shiftRight(Integer a, Integer b)
+	{
+		return a >> b;
+	}
+
+	@Override
+	public Integer shiftUnsignedRight(Integer a, Integer b)
+	{
+		return a >>> b;
+	}
+
+	@Override
+	public Integer and(Integer a, Integer b)
+	{
+		return a & b;
+	}
+
+	@Override
+	public Integer or(Integer a, Integer b)
+	{
+		return a | b;
+	}
+
+	@Override
+	public Integer xor(Integer a, Integer b)
+	{
+		return a ^ b;
+	}
+
+	@Override
+	public Integer complement(Integer a)
+	{
+		return ~a;
+	}
+
+	@Override
 	public int compare(Integer a, Integer b)
 	{
 		return a.compareTo(b);

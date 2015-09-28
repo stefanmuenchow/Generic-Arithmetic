@@ -139,6 +139,62 @@ public class Numbers
 	}
 
 	/**
+	 * @see Operations#shiftLeft(Number, Number)
+	 */
+	static public Number shiftLeft(Number a, Number b)
+	{
+		return getArithmetic(a, b).shiftLeft(b).value();
+	}
+
+	/**
+	 * @see Operations#shiftRight(Number, Number)
+	 */
+	static public Number shiftRight(Number a, Number b)
+	{
+		return getArithmetic(a, b).shiftRight(b).value();
+	}
+
+	/**
+	 * @see Operations#shiftUnsignedRight(Number, Number)
+	 */
+	static public Number shiftUnsignedRight(Number a, Number b)
+	{
+		return getArithmetic(a, b).shiftUnsignedRight(b).value();
+	}
+
+	/**
+	 * @see Operations#and(Number, Number)
+	 */
+	static public Number and(Number a, Number b)
+	{
+		return getArithmetic(a, b).and(b).value();
+	}
+
+	/**
+	 * @see Operations#or(Number, Number)
+	 */
+	static public Number or(Number a, Number b)
+	{
+		return getArithmetic(a, b).or(b).value();
+	}
+
+	/**
+	 * @see Operations#xor(Number, Number)
+	 */
+	static public Number xor(Number a, Number b)
+	{
+		return getArithmetic(a, b).xor(b).value();
+	}
+
+	/**
+	 * @see Operations#complement(Number)
+	 */
+	static public Number complement(Number n)
+	{
+		return getArithmetic(n).complement().value();
+	}
+
+	/**
 	 * @see Operations#compare(Number, Number)
 	 */
 	static public <N extends Number & Comparable<N>, M extends Number & Comparable<M>> int compare(N a, M b)

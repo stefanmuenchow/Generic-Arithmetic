@@ -1,8 +1,6 @@
 package com.stefanmuenchow.arithmetic.operation;
 
-import com.stefanmuenchow.arithmetic.Operations;
-
-public class DoubleOperations implements Operations<Double> {
+public class DoubleOperations extends FloatingPointOperations<Double> {
 
 	@Override
 	public Double add(Double a, Double b) {

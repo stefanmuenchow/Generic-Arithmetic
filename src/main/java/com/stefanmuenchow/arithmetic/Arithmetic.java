@@ -165,6 +165,88 @@ public class Arithmetic<X extends Number & Comparable<X>> {
 	}
 	
 	/**
+	 * Shift current value of this instance to the left by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() << operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftLeft(A operand) {
+		value = getOperations().shiftLeft(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Shift current value of this instance to the right by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() >> operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftRight(A operand) {
+		value = getOperations().shiftRight(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Shift current value of this instance to the right (unsigned) by operand places.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() >>> operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> shiftUnsignedRight(A operand) {
+		value = getOperations().shiftUnsignedRight(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise AND to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() & operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> and(A operand) {
+		value = getOperations().and(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise inclusive OR to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() | operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> or(A operand) {
+		value = getOperations().or(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise exclusive OR to current value of this instance and the operand.
+	 * 
+	 * @param <A>		Operand type
+	 * @param operand	Operand value
+	 * @return			{@link Arithmetic} with {@code (this.value() ^ operand)} as new value
+	 */
+	public <A extends Number> Arithmetic<X> xor(A operand) {
+		value = getOperations().xor(value, convertNumber(operand));
+		return this;
+	}
+	
+	/**
+	 * Apply bitwise complement to the current value of this instance.
+	 * 
+	 * @return			{@link Arithmetic} with {@code ~(this.value())} as new value
+	 */
+	public Arithmetic<X> complement() {
+		value = getOperations().complement(value);
+		return this;
+	}
+	
+	/**
 	 * Compares current value of this instance with the operand.
 	 * 
 	 * @param <A>		Operand type

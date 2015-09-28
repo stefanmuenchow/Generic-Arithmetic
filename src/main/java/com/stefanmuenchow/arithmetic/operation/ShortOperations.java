@@ -50,6 +50,48 @@ public class ShortOperations implements Operations<Short> {
 	}
 
 	@Override
+	public Short shiftLeft(Short a, Short b)
+	{
+		return (short) (a << b);
+	}
+
+	@Override
+	public Short shiftRight(Short a, Short b)
+	{
+		return (short) (a >> b);
+	}
+
+	@Override
+	public Short shiftUnsignedRight(Short a, Short b)
+	{
+		return (short) (a >>> b);
+	}
+
+	@Override
+	public Short and(Short a, Short b)
+	{
+		return (short) (a & b);
+	}
+
+	@Override
+	public Short or(Short a, Short b)
+	{
+		return (short) (a | b);
+	}
+
+	@Override
+	public Short xor(Short a, Short b)
+	{
+		return (short) (a ^ b);
+	}
+
+	@Override
+	public Short complement(Short a)
+	{
+		return (short) (~a);
+	}
+
+	@Override
 	public int compare(Short a, Short b)
 	{
 		return a.compareTo(b);

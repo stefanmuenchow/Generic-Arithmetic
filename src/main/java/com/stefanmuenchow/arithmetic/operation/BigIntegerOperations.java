@@ -52,6 +52,41 @@ public class BigIntegerOperations implements Operations<BigInteger> {
 	}
 
 	@Override
+	public BigInteger shiftLeft(BigInteger a, BigInteger b) {
+		return a.shiftLeft(b.intValueExact());
+	}
+
+	@Override
+	public BigInteger shiftRight(BigInteger a, BigInteger b) {
+		return a.shiftRight(b.intValueExact());
+	}
+
+	@Override
+	public BigInteger shiftUnsignedRight(BigInteger a, BigInteger b) throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("The >>> operator is undefined for " + BigInteger.class.getSimpleName() + "s");
+	}
+	
+	@Override
+	public BigInteger and(BigInteger a, BigInteger b) {
+		return a.and(b);
+	}
+
+	@Override
+	public BigInteger or(BigInteger a, BigInteger b) {
+		return a.or(b);
+	}
+
+	@Override
+	public BigInteger xor(BigInteger a, BigInteger b) {
+		return a.xor(b);
+	}
+
+	@Override
+	public BigInteger complement(BigInteger a) {
+		return a.not();
+	}
+
+	@Override
 	public int compare(BigInteger a, BigInteger b)
 	{
 		return a.compareTo(b);

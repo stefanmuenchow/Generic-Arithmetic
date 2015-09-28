@@ -50,6 +50,48 @@ public class LongOperations implements Operations<Long> {
 	}
 
 	@Override
+	public Long shiftLeft(Long a, Long b)
+	{
+		return a << b;
+	}
+
+	@Override
+	public Long shiftRight(Long a, Long b)
+	{
+		return a >> b;
+	}
+
+	@Override
+	public Long shiftUnsignedRight(Long a, Long b)
+	{
+		return a >>> b;
+	}
+
+	@Override
+	public Long and(Long a, Long b)
+	{
+		return a & b;
+	}
+
+	@Override
+	public Long or(Long a, Long b)
+	{
+		return a | b;
+	}
+
+	@Override
+	public Long xor(Long a, Long b)
+	{
+		return a ^ b;
+	}
+
+	@Override
+	public Long complement(Long a)
+	{
+		return ~a;
+	}
+
+	@Override
 	public int compare(Long a, Long b)
 	{
 		return a.compareTo(b);

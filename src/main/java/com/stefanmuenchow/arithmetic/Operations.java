@@ -11,6 +11,8 @@
 
 package com.stefanmuenchow.arithmetic;
 
+import java.math.BigInteger;
+
 /**
  * Provides operations for a specified numerical data type.
  * 
@@ -100,14 +102,78 @@ public interface Operations<X extends Number & Comparable<X>> {
 	X neg(X a);
 	
 	/**
-	 * Performs numerical comparison of a and b.
+	 * Bitwise left shift (<<).<br/>
+	 * Only supported for integer types.
 	 * 
 	 * @param a
 	 * @param b
 	 * @return
+	 */
+	X shiftLeft(X a, X b);
+	
+	/**
+	 * Bitwise right shift (>>).<br/>
+	 * Only supported for integer types.
 	 * 
-	 * @see {@link Double#compareTo(Double)}
-	 * @see {@link Long#compareTo(Long)}
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X shiftRight(X a, X b);
+	
+	/**
+	 * Bitwise unsigned right shift (>>>).<br/>
+	 * Only supported for integer types, except {@link BigInteger}.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X shiftUnsignedRight(X a, X b);
+	
+	/**
+	 * Bitwise AND (&).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X and(X a, X b);
+	
+	/**
+	 * Bitwise inclusive OR (|).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X or(X a, X b);
+	
+	/**
+	 * Bitwise exclusive OR (^).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	X xor(X a, X b);
+	
+	/**
+	 * Unary bitwise complement (~).<br/>
+	 * Only supported for integer types.
+	 * 
+	 * @param a
+	 * @return
+	 */
+	X complement(X a);
+	
+	/**
+	 * @param a
+	 * @param b
+	 * @return
 	 */
 	int compare(X a, X b);
 	
